@@ -12,8 +12,7 @@ listaPaises = ['Argentina', 'Brasil', 'Mexico', 'Uruguay', 'chile', 'España', '
 
 #Instancia Jugadores y equipo club[1]
 def generar_instanciaEquipo(nombre, colorA, colorB, pais, players, nombres, paises):
-    equipoA = club(nombre, colorA, colorB, pais)
-    equipoA = club(nombre, colorA, colorB, pais)
+    equipo = club(nombre, colorA, colorB, pais)
     for i in range(0,11):
         nombre = random.choice(nombres)
         edad = random.randint(18, 33)

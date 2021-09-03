@@ -4,9 +4,9 @@ class jugadores:
         self.edad = edad
         self.pais = pais
         self.dorsal = dorsal
-        self.tarjetasA = int
-        self.tarjetasR = int
-        self.goles = int
+        self.tarjetasA =  0
+        self.tarjetasR = 0
+        self.goles = 0
 
     def mostrar_jugador(self):
                 print(f'''

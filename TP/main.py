@@ -1,5 +1,7 @@
 #M
 import random
+import time
+from typing import Counter
 from club import club
 from jugadores import jugadores
 from partido import partido
@@ -45,17 +47,19 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, players, nombres, pais
 #                 break
 
     
-def disparos(juego):
-        cont_shot = 0
+def jugar(partidoInicia, duracion):
+    inicio_partido = time.time()
+    tiempo_partido = duracion
 
-        while cont_shot < 100:
-            goles = random.randint(0, 150)
+    #Probabilidades
+    probabilidadPases = 0.20
+    probabilidadGol = 0.20
 
-            if goles >= 80:
-                cont_shot += 1
-                juego.actualizar_gol()
-            else:
-                break
+    while time.time() < inicio_partido + tiempo_partido:
+        time.sleep(1)
+        if partidoInicia.hacer_pases(probabilidadPases):
+            partidoInicia.hacer_disparo(probabilidadGol)
+
 
 
 
@@ -64,9 +68,10 @@ equipoA = generar_instanciaEquipo('Arsenal', 'Rojo', 'Blanco', 'Italia', plantel
 equipoB = generar_instanciaEquipo('River', 'Amarillo', 'Azul', 'Italia', plantelB, listaNombres, listaPaises)
 partido1 = partido('La bombonera', 'Marcos tragachele', equipoA, equipoB)
 
-disparos(partido1)
+jugar(partido1, 5)
 
 partido1.mostrar_gol(equipoA)
+partido1.mostrar_pases(equipoA)
 # equipoA.mostrar_plantel()
 # equipoA.mostrar_equipo()
 

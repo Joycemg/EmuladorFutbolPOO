@@ -8,7 +8,7 @@ class jugadores:
         self.tarjetasR = int
         self.goles = int
 
-    def mostrar_jugadores(self):
+    def mostrar_jugador(self):
                 print(f'''
             Nombre: {self.nombre} | Edad: {self.edad}
             Pais: {self.pais} | dorsal: {self.dorsal}

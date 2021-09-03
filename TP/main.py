@@ -1,6 +1,5 @@
 #M
 import random
-import time
 from club import Club
 from jugadores import Jugador
 from partido import partido
@@ -36,3 +35,7 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
 #Creacion de equipos y partido
 equipoA = generar_instanciaEquipo('Arsenal', 'Rojo', 'Blanco', 'Italia', listaNombres, listaPaises)
 equipoB = generar_instanciaEquipo('River', 'Amarillo', 'Azul', 'Italia', listaNombres, listaPaises)
+
+primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 5)
+
+primerPartido.jugar() #Recordatorio metodo agregar defensor 

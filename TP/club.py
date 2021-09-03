@@ -11,8 +11,8 @@ class Club:
 
     def comprar_jugador(self, jugadores):
         self.plantel.append(jugadores)
-        print(f'''
-        {self.nombreC} compro al jugador {jugadores.nombre} ''')
+        # print(f'''
+        # {self.nombreC} compro al jugador {jugadores.nombre} ''')
 
     def mostrar_plantel(self):
         for i in range(0,11):
@@ -26,7 +26,7 @@ class Club:
                         ''')
     
 
-    
+
     def actualizar_partidosGanados(self):
         pass
     def actualizar_partidosPerdidos(self):

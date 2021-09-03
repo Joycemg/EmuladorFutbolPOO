@@ -1,4 +1,5 @@
 import random
+import time
 class partido:
     def __init__(self, cancha, arbitro, equipoA, equipoB, duracion):
         self.cancha = cancha
@@ -31,26 +32,22 @@ class partido:
         pass
 
 
-    # def jugar(partidoInicia, duracion):
-    #     inicio_partido = time.time()
-    #     tiempo_partido = duracion
 
-    #     Probabilidades
-    #     probabilidadPases = 0.80
-    #     probabilidadGol = 0.20
+        ##Metodo incompleto y nada funcional
+    def jugar(self):
+        inicio_partido = time.time()
+        tiempo_partido = self.duracion
 
-    #     def emulacion(equipoA, equipoB, duracion):
-    #         while time.time() < inicio_partido + tiempo_partido:
-    #             time.sleep(1)
-    #             if partidoInicia.hacer_pases(probabilidadPases):
-    #                 partidoInicia.hacer_disparo(probabilidadGol)
-    #             else:
-    #                 pass
+        #Probabilidades
+        probabilidadPases = 0.80
+        probabilidadGol = 0.20
 
-
-
-
-
+        while time.time() < inicio_partido + tiempo_partido:
+            time.sleep(1)
+            if self.hacer_pases(probabilidadPases):
+                self.hacer_disparo(probabilidadGol)
+            else:
+                pass
 
 
     def hacer_pases(self, probabilidadPases):

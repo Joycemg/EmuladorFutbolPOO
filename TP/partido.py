@@ -27,6 +27,9 @@ class partido:
     def mostrar_pases(self):
         pass
 
+    def mostrar_sanciones(self):
+        pass
+
 
     # def jugar(partidoInicia, duracion):
     #     inicio_partido = time.time()

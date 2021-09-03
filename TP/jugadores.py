@@ -8,6 +8,7 @@ class Jugador:
         self.tarjetasA =  0
         self.tarjetasR = 0
         self.goles = 0
+        self.golesFallidos = 0
 
     def mostrar_jugador(self):
                 print(f'''
@@ -27,6 +28,12 @@ class Jugador:
     def mostrar_goles(self):
         pass
 
+    def mostrar_golesFallidos(self):
+        pass
+
     def actualizar_goles(self):
         pass
+    def actualizar_golesFallidos(self):
+        pass
+    
     

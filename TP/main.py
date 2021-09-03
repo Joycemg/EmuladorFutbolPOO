@@ -1,8 +1,8 @@
 #M
 import random
 import time
-from club import club
-from jugadores import jugadores
+from club import Club
+from jugadores import Jugador
 from partido import partido
 
 
@@ -16,15 +16,15 @@ listaPaises = ['Argentina', 'Brasil', 'Mexico', 'Uruguay', 'chile', 'España', '
 
 #Construccion de equipos[1]
 def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
-    equipo = club(nombre, colorA, colorB, pais)
+    equipo = Club(nombre, colorA, colorB, pais)
     for i in range(0,11):
         nombre = random.choice(nombres)
         edad = random.randint(18, 33)
         pais = random.choice(paises)
         listaNombres.remove(nombre)
         dorsal = random.randint(1, 60)
-        jugador = jugadores(nombre, edad, pais, dorsal, equipo.nombreC)
-        equipo.agregar_plantel(jugador)    #[1]
+        jugador = Jugador(nombre, edad, pais, dorsal, equipo.nombreC)
+        equipo.comprar_jugador(jugador)    #[1]
 
     return equipo
  
@@ -52,6 +52,3 @@ def jugar(partidoInicia, duracion):
 equipoA = generar_instanciaEquipo('Arsenal', 'Rojo', 'Blanco', 'Italia', listaNombres, listaPaises)
 equipoB = generar_instanciaEquipo('River', 'Amarillo', 'Azul', 'Italia', listaNombres, listaPaises)
 partido1 = partido('La bombonera', 'Marcos tragachele', equipoA, equipoB, 2)
-
-
-equipoA.plantel[0].mostrar_jugador()

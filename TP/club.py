@@ -1,5 +1,5 @@
 
-class club:
+class Club:
     def __init__(self, nombreC, color1, color2, pais):
         self.nombreC = nombreC
         self.colores = (color1, color2)
@@ -7,8 +7,10 @@ class club:
         self.plantel = []
     
 
-    def agregar_plantel(self, jugadores):
+    def comprar_jugador(self, jugadores):
         self.plantel.append(jugadores)
+        print(f'''
+        {self.nombreC} compro al jugador {jugadores.nombre} ''')
 
     def mostrar_plantel(self):
         for i in range(0,11):
@@ -20,10 +22,4 @@ class club:
             Equipo: {self.nombreC} | Colores: {self.colores}
                         Pais: {self.pais}
                         ''')
-
-    def mostrar_pases(self):
-        pass
-
-    def actualizar_pases(self):
-        pass
     

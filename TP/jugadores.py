@@ -1,4 +1,4 @@
-class jugadores:
+class Jugador:
     def __init__(self, nombre, edad, pais, dorsal, equipo):
         self.nombre = nombre
         self.edad = edad

@@ -28,6 +28,27 @@ class partido:
         pass
 
 
+    # def jugar(partidoInicia, duracion):
+    #     inicio_partido = time.time()
+    #     tiempo_partido = duracion
+
+    #     Probabilidades
+    #     probabilidadPases = 0.80
+    #     probabilidadGol = 0.20
+
+    #     def emulacion(equipoA, equipoB, duracion):
+    #         while time.time() < inicio_partido + tiempo_partido:
+    #             time.sleep(1)
+    #             if partidoInicia.hacer_pases(probabilidadPases):
+    #                 partidoInicia.hacer_disparo(probabilidadGol)
+    #             else:
+    #                 pass
+
+
+
+
+
+
 
     def hacer_pases(self, probabilidadPases):
         cont_pases = 0

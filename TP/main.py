@@ -28,21 +28,6 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
 
     return equipo
  
-def jugar(partidoInicia, duracion):
-    inicio_partido = time.time()
-    tiempo_partido = duracion
-
-    #Probabilidades
-    probabilidadPases = 0.80
-    probabilidadGol = 0.20
-
-    # def emulacion(equipoA, equipoB, duracion):
-    #     while time.time() < inicio_partido + tiempo_partido:
-    #         time.sleep(1)
-    #         if partidoInicia.hacer_pases(probabilidadPases):
-    #             partidoInicia.hacer_disparo(probabilidadGol)
-    #         else:
-    #             pass
 
 
 
@@ -51,4 +36,3 @@ def jugar(partidoInicia, duracion):
 #Creacion de equipos y partido
 equipoA = generar_instanciaEquipo('Arsenal', 'Rojo', 'Blanco', 'Italia', listaNombres, listaPaises)
 equipoB = generar_instanciaEquipo('River', 'Amarillo', 'Azul', 'Italia', listaNombres, listaPaises)
-partido1 = partido('La bombonera', 'Marcos tragachele', equipoA, equipoB, 2)

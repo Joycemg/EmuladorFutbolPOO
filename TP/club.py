@@ -5,6 +5,8 @@ class Club:
         self.colores = (color1, color2)
         self.pais = pais
         self.plantel = []
+        self.partidoGanados = 0
+        self.partidoPerdidos = 0
     
 
     def comprar_jugador(self, jugadores):
@@ -23,3 +25,9 @@ class Club:
                         Pais: {self.pais}
                         ''')
     
+
+    
+    def actualizar_partidosGanados(self):
+        pass
+    def actualizar_partidosPerdidos(self):
+        pass

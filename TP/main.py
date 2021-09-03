@@ -28,14 +28,11 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
     return equipo
  
 
-
-
-
-
 #Creacion de equipos y partido
 equipoA = generar_instanciaEquipo('Arsenal', 'Rojo', 'Blanco', 'Italia', listaNombres, listaPaises)
 equipoB = generar_instanciaEquipo('River', 'Amarillo', 'Azul', 'Italia', listaNombres, listaPaises)
 
 primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 5)
 
-primerPartido.jugar() #Recordatorio metodo agregar defensor 
+primerPartido.jugar()
+# primerPartido.jugar() #Recordatorio metodo agregar defensor 

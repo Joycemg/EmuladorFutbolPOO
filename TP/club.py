@@ -7,6 +7,7 @@ class Club:
         self.plantel = []
         self.partidoGanados = 0
         self.partidoPerdidos = 0
+        self.local = False
     
 
     def comprar_jugador(self, jugadores):
@@ -25,7 +26,11 @@ class Club:
                         Pais: {self.pais}
                         ''')
     
+    def estado_ofensivo(self):
+        self.local = True
 
+    def estado_defensa(self):
+        self.local = False
 
     def actualizar_partidosGanados(self):
         pass

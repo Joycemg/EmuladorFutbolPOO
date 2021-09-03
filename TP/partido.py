@@ -6,8 +6,7 @@ class partido:
         self.arbitro = arbitro
         self.pases = 0
         self.gol = 0
-        self.equipoA = equipoA
-        self.equipoB = equipoB
+        self.equipos = (equipoA, equipoB)
         self.duracion = duracion
 
 
@@ -35,42 +34,63 @@ class partido:
 
         ##Metodo incompleto y nada funcional
     def jugar(self):
-        inicio_partido = time.time()
-        tiempo_partido = self.duracion
+        self.cont_pases = 0
+        self.contador = 0
+        self.inicio_partido = time.time()
+        self.tiempo_partido = self.duracion
 
         #Probabilidades
-        probabilidadPases = 0.80
-        probabilidadGol = 0.20
+        self.probabilidadPases = 0.80
+        self.probabilidadGol = 5.20
 
-        while time.time() < inicio_partido + tiempo_partido:
+        while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(1)
-            if self.hacer_pases(probabilidadPases):
-                self.hacer_disparo(probabilidadGol)
+            # self.contador += 1
+            # print(self.contador)
+
+            if self.hacer_pases(self.probabilidadPases):
+                self.hacer_disparo(self.probabilidadGol)
             else:
                 pass
 
 
     def hacer_pases(self, probabilidadPases):
-        cont_pases = 0
-        while cont_pases < 4:
-            Pases = random.randint(0, 100) * probabilidadPases
-            if Pases >= 80:
-                cont_pases += 1
-                self.actualizar_pases()
-            else:
-                pass
-        if cont_pases == 4:
+        Pases = random.randint(0, 100) * probabilidadPases
+        self.numero = random.randint(0,10)
+        if Pases >= 30:
+            self.equipos[0].plantel[self.numero].agarra_pelota()
+            self.cont_pases += 1
+        else:
+            self.equipos[0].plantel[self.numero].pierde_pelota()
+
+            self.cont_pases = 0
+
+        if self.cont_pases == 4:
+            self.actualizar_pases()
+            self.cont_pases = 0
+            
             return True
 
     def hacer_disparo(self, probabilidadGol):
         disparo = random.randint(0, 100) * probabilidadGol
-        if disparo >= 80:
+        if disparo >= 50:
             self.actualizar_gol()
+            print('                     GOOOL')
+        else:
 
-    def sorteo_saque(self, equipoA, equipoB):
-        arreglo = [equipoA, equipoB]
-        ganador_saque = random.choice(arreglo)
-        return ganador_saque
+            print('                     FALLO')
+
+    # def sorteo_saque(self):
+    #     self.ganador_saque = random.choice(self.equipos)
+    #     if self.ganador_saque == self.equipos[0]:
+    #         self.equipos[0].estado_ofensivo()
+    #     else:
+    #         self.equipos[1].estado_ofensivo()
+
+    
+    # def equipo_local(self):
+    #     print(f'''
+    #     El equipo local va ser {self.ganador_saque.nombreC}''')
 
 
 
@@ -79,3 +99,5 @@ class partido:
 
     def actualizar_pases(self):
         self.pases += 1
+
+    

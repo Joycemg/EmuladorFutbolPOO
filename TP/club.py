@@ -7,7 +7,7 @@ class Club:
         self.plantel = []
         self.partidoGanados = 0
         self.partidoPerdidos = 0
-        self.local = False
+        # self.local = False
     
 
     def comprar_jugador(self, jugadores):

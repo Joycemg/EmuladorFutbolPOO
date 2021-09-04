@@ -9,6 +9,7 @@ class Jugador:
         self.tarjetasR = 0
         self.goles = 0
         self.golesFallidos = 0
+        self.pelota = False
 
     def mostrar_jugador(self):
                 print(f'''
@@ -21,6 +22,18 @@ class Jugador:
             Tarjeta Amarilla {self.tarjetasA}
             Tarjeta ROja {self.tarjetasR}        
                       ''')
+
+
+    def agarra_pelota(self):
+        self.pelota = True
+        print(f'''
+        {self.nombre} tiene la pelota''')
+        
+    def pierde_pelota(self):
+        self.pelota = False
+        print(f'''
+        {self.nombre} pierde la pelota''')
+
 
     def actualizar_tarjetas(self):
         pass

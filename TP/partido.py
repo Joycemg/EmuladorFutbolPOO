@@ -8,12 +8,7 @@ class partido:
         self.pases = 0
         self.equipos = [equipoA, equipoB]
         self.duracion = duracion
-
-        self.cont_pases = 0
-        self.index = 0
-        self.contador = 0
-        self.inicio_partido = time.time()
-        self.tiempo_partido = self.duracion
+        self.cont_pasesE = 0
 
     def mostrar_inicio(self):
         print(f'''
@@ -41,7 +36,13 @@ class partido:
 
         ##Metodo incompleto y nada funcional
     def jugar(self):
-    
+        
+        self.index = 0
+        self.contador = 0
+        self.inicio_partido = time.time()
+        self.tiempo_partido = self.duracion
+
+        
         #Probabilidades
         self.probabilidadPases = 0.80
         self.probabilidadGol = 10.20
@@ -60,26 +61,34 @@ class partido:
     def hacer_pases(self, probabilidadPases):
         Pases = random.randint(0, 100) * probabilidadPases
 
-        if Pases >= 40:
-            self.equipos[self.index].agarra_pelota()
-            self.cont_pases += 1
 
-        else:
-            self.equipos[self.index].pierde_pelota()
-            self.cont_pases = 0
-            if self.cont_pases == 0:
-                self.index = 0
+        if self.equipos[0].modo == True:
+            if Pases >= 35:
+                self.equipos[0].plantel[0].agarra_pelota()
+                self.cont_pasesE += 1
             else:
-                self.index = 1
+                self.equipos[0].plantel[0].pierde_pelota()
+                self.equipos[0].modo_defensa()
+                self.equipos[1].modo_ofensivo()
+                self.cont_pasesE = 0
+        else:
+            if Pases >= 40:
+                self.equipos[1].plantel[0].agarra_pelota()
+                self.cont_pasesE += 1
+            else:
+                self.equipos[1].plantel[0].pierde_pelota()
+                self.equipos[1].modo_defensa()
+                self.equipos[0].modo_ofensivo()
+                self.cont_pasesE = 0
 
-        if self.cont_pases == 4:
+        if self.cont_pasesE == 4:
             self.actualizar_pases()
-            self.cont_pases = 0
-            
+            self.cont_pasesE = 0
             return True
 
     def hacer_disparo(self, probabilidadGol):
         disparo = random.randint(0, 100) * probabilidadGol
+
         if disparo >= 50:
             self.actualizar_goles()
             print('                     GOOOL')
@@ -87,17 +96,17 @@ class partido:
 
             print('                     FALLO')
 
-    # def sorteo_saque(self):
-    #     self.ganador_saque = random.choice(self.equipos)
-    #     if self.ganador_saque == self.equipos[0]:
-    #         self.equipos[0].estado_ofensivo()
-    #     else:
-    #         self.equipos[1].estado_ofensivo()
+    def sorteo_saque(self):
+        self.ganador_saque = random.choice(self.equipos)
+        if self.ganador_saque == self.equipos[0]:
+            self.equipos[0].modo_ofensivo()
+        else:
+            self.equipos[1].modo_ofensivo()
 
     
-    # def equipo_local(self):
-    #     print(f'''
-    #     El equipo local va ser {self.ganador_saque.nombreC}''')
+    def equipo_ganadorDeSorteo(self):
+        print(f'''
+        El equipo local va ser {self.ganador_saque.nombreC}''')
 
 
 

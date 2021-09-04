@@ -1,5 +1,6 @@
 import random
 import time
+from funciones import show
 class partido:
     def __init__(self, cancha, arbitro, equipoA, equipoB, duracion):
         self.cancha      = cancha
@@ -15,7 +16,7 @@ class partido:
         self.indexPasado = 0
 
     def mostrar_inicio(self):
-        print(f'''
+        show(f'''
         {'-' * 60}''')
         print(f'''
         Duracion:   {self.duracion} minutos     
@@ -25,20 +26,24 @@ class partido:
         Equipos :   {self.equipos[0].nombreC}         VS            {self.equipos[1].nombreC}
         Colores :   {self.equipos[0].colores[0]} | {self.equipos[0].colores[1]}                {self.equipos[1].colores[0]} | {self.equipos[1].colores[1]}
         Pais    :   {self.equipos[0].pais}                       {self.equipos[1].pais}
-        {'-' * 60}''')
-        print('         EMULACION DE UN PARTIDO DE FUTBOL CON DOS JUGADORES')
+        {'-' * 60}
+        ''')
         time.sleep(2)
 
+
     def mostrar_ganador(self):
-        print('-'*40)
         print(f'            {self.equipos[0].nombreC}   [{self.goles[0]}]')
         print(f'            {self.equipos[1].nombreC}   [{self.goles[1]}]')
         if self.goles[0] == self.goles[1]:
-            print(f'              Los equipos empataron      ')
+            print(f'''            
+                        Los equipos empataron     ''')
         elif self.goles[0] < self.goles[1]:
-            print(f'            {self.equipos[1].nombreC}  Gano')
+            print(' ')
+            print(f'''           
+        {self.equipos[1].nombreC}  Gano''')
         else:
-            print(f'            {self.equipos[0].nombreC}  Gano')
+            print(f'''            
+        {self.equipos[0].nombreC}  Gano''')
         print('-'*40)     
     def mostrar_goles(self):
         print(f'''{self.equipos[0].nombreC} realizaron {self.goles[0]} goles''')
@@ -49,8 +54,15 @@ class partido:
     def mostrar_info(self):
         print(f'Equipo:    {self.equipos[0].nombreC}    Goles: [{self.goles[0]}] Goles Fallidos: [{self.golesF[0]}]    Pases: [{self.pases[0]}]')
         print(f'Equipo:    {self.equipos[1].nombreC}    Goles: [{self.goles[1]}] Goles Fallidos: [{self.golesF[1]}]    Pases: [{self.pases[1]}]')
-        pass
 
+        for x in range(0,2):
+            for i in range(0,11):
+                if self.equipos[x].plantel[i].goles == 1:
+                    print(f'''
+{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} gol''')
+                elif self.equipos[x].plantel[i].goles >= 2:
+                    print(f'''
+{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} goles''')
     def mostrar_sanciones(self):
 
 
@@ -60,19 +72,19 @@ class partido:
 
         ##Metodo incompleto y nada funcional
     def jugar(self):
-        contador = 0
+        # contador = 0
         self.inicio_partido     = time.time()
         self.tiempo_partido     = self.duracion
 
         
         #Probabilidades
-        self.probabilidadPases  = 1.80
-        self.probabilidadGol    = 0.20
+        self.probabilidadPases  = 5.80
+        self.probabilidadGol    = 10.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
-            time.sleep(0.2)
-            contador += 1
-            print(contador)
+            time.sleep(0.1)
+            # contador += 1
+            # print(contador)
 
             if self.hacer_pases(self.probabilidadPases):
                 self.hacer_disparo(self.probabilidadGol)
@@ -135,14 +147,16 @@ class partido:
         if disparo >= 50:
             if self.equipos[0].modo == True:
                 self.goles[0]       += 1
-                self.equipos[1].golazo(self.index)
+                self.equipos[0].golazo(self.index)
                 self.equipos[0].modo_defensa()
                 self.equipos[1].modo_ofensivo()
+                self.equipos[0].plantel[self.index].goles += 1
                 self.equipos[0].plantel[self.index].quitar_pelota()
                 self.equipos[1].plantel[self.index].dar_pelota()
 
             else:
                 self.goles[1]      += 1
+                self.equipos[1].plantel[self.index].goles += 1
                 self.equipos[1].golazo(self.index)
                 self.equipos[1].modo_defensa()
                 self.equipos[0].modo_ofensivo()
@@ -157,7 +171,7 @@ class partido:
                    self.equipos[0].modo_defensa()
                    self.equipos[1].modo_ofensivo()
             else:
-                self.equipos[1].golazo(self.index)
+                self.equipos[1].fallazo(self.index)
                 self.golesF[1]      += 1
                 self.equipos[1].plantel[self.index].quitar_pelota()
                 self.equipos[0].plantel[self.index].dar_pelota()

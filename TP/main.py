@@ -1,5 +1,6 @@
 #M
 import random
+import time
 from club import Club
 from jugadores import Jugador
 from partido import partido
@@ -23,6 +24,7 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
         listaNombres.remove(nombre)
         dorsal = random.randint(1, 60)
         jugador = Jugador(nombre, edad, pais, dorsal, equipo.nombreC)
+        time.sleep(0.2)
         equipo.comprar_jugador(jugador)    #[1]
 
     return equipo
@@ -32,7 +34,7 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
 equipoA = generar_instanciaEquipo('Tigres', 'Rojo', 'Blanco', 'Italia', listaNombres, listaPaises)
 equipoB = generar_instanciaEquipo('Leones', 'Amarillo', 'Azul', 'Italia', listaNombres, listaPaises)
 
-primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 5)
+primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 10)
 
 primerPartido.mostrar_inicio()
 primerPartido.sorteo_saque()
@@ -40,4 +42,3 @@ primerPartido.equipo_ganadorDeSorteo()
 primerPartido.jugar()
 primerPartido.mostrar_ganador()
 primerPartido.mostrar_info()
-# primerPartido.jugar() #Recordatorio metodo agregar defensor 

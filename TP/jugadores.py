@@ -34,8 +34,6 @@ class Jugador:
     def actualizar_tarjetas(self):
         pass
 
-    def mostrar_goles(self):
-        pass
 
     def mostrar_golesFallidos(self):
         pass

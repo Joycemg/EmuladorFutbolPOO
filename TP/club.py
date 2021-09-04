@@ -32,8 +32,22 @@ class Club:
     def modo_defensa(self):
         self.modo = False
 
+    def da_pase(self, indexPasado, index):
+        print(f'''
+            {self.nombreC} tiene la pelota
+            {self.plantel[indexPasado].dorsal}-{self.plantel[indexPasado].nombre} se la paso a {self.plantel[index].dorsal}-{self.plantel[index].nombre}''')
 
+    def pierde_pase(self, indexPasado, index):
+        print(f'''
+            {self.nombreC} pierde la pelota
+            {self.plantel[index].dorsal}-{self.plantel[index].nombre} se la quito a {self.plantel[indexPasado].dorsal}-{self.plantel[indexPasado].nombre}''')
 
+    def golazo(self, index):
+        print(f'''
+            {self.plantel[index].dorsal}-{self.plantel[index].nombre} Dispara al arco [  GOOOOOL!!] de {self.nombreC}''')
+    def fallazo(self, index):
+        print(f'''
+            {self.plantel[index].dorsal}-{self.plantel[index].nombre} Dispara al arco [  FALLO!!  ] de {self.nombreC}''')
 
     def actualizar_partidosGanados(self):
         pass

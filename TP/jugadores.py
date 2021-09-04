@@ -24,15 +24,11 @@ class Jugador:
                       ''')
 
 
-    def agarra_pelota(self):
+    def dar_pelota(self):
         self.pelota = True
-        print(f'''
-        {self.nombre} tiene la pelota''')
         
-    def pierde_pelota(self):
+    def quitar_pelota(self):
         self.pelota = False
-        print(f'''
-        {self.nombre} pierde la pelota''')
 
 
     def actualizar_tarjetas(self):

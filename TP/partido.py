@@ -86,48 +86,45 @@ class partido:
 
         if Pases >= 60:
             if self.equipos[0].modo == True:
-                if self.equipos[0].plantel[self.index].pelota == True:
-                    self.equipos[0].plantel[self.index].quitar_pelota()
-                    self.indexPasado  = self.index
-                    self.index        = random.randint(0,10)
-                    self.pases[0]    += 1
-                    self.cont_pasesE += 1
-                    self.equipos[0].plantel[self.index].dar_pelota()
-                    self.equipos[0].da_pase(self.indexPasado, self.index)
+                self.equipos[0].plantel[self.index].quitar_pelota()
+                self.indexPasado  = self.index
+                self.index        = random.randint(0,10)
+                self.pases[0]    += 1
+                self.cont_pasesE += 1
+                self.equipos[0].plantel[self.index].dar_pelota()
+                self.equipos[0].da_pase(self.indexPasado, self.index)
+                    
             else:
-                if self.equipos[1].plantel[self.index].pelota == True:
-                    self.equipos[1].plantel[self.index].pelota = False
-                    self.indexPasado = self.index
-                    self.index       = random.randint(0,10)
-                    self.pases[1]    += 1
-                    self.cont_pasesE += 1
-                    self.equipos[1].da_pase(self.indexPasado, self.index)
-                    self.equipos[1].plantel[self.index].dar_pelota()
+                self.equipos[1].plantel[self.index].quitar_pelota()
+                self.indexPasado = self.index
+                self.index       = random.randint(0,10)
+                self.pases[1]    += 1
+                self.cont_pasesE += 1
+                self.equipos[1].da_pase(self.indexPasado, self.index)
+                self.equipos[1].plantel[self.index].dar_pelota()
 
         else:
             if self.equipos[0].modo == True:
-                if self.equipos[0].plantel[self.index].pelota == True:
-                    self.equipos[0].plantel[self.index].quitar_pelota()
-                    self.indexPasado = self.index
-                    self.index       = random.randint(0,10)
-                    self.pases[1]   += 1
-                    self.cont_pasesE = 0
-                    self.equipos[0].modo_defensa()
-                    self.equipos[1].modo_ofensivo()
-                    self.equipos[1].plantel[self.index].dar_pelota()
-                    self.equipos[0].pierde_pase(self.indexPasado, self.index)
+                self.equipos[0].plantel[self.index].quitar_pelota()
+                self.indexPasado = self.index
+                self.index       = random.randint(0,10)
+                self.pases[1]   += 1
+                self.cont_pasesE = 0
+                self.equipos[0].modo_defensa()
+                self.equipos[1].modo_ofensivo()
+                self.equipos[0].pierde_pase(self.indexPasado, self.index)
+                self.equipos[1].plantel[self.index].dar_pelota()
 
             else:
-                if self.equipos[1].plantel[self.index].pelota == True:
-                    self.equipos[1].plantel[self.index].quitar_pelota()
-                    self.indexPasado = self.index
-                    self.index       = random.randint(0,10)
-                    self.pases[0]   += 1
-                    self.cont_pasesE = 0
-                    self.equipos[1].modo_defensa()
-                    self.equipos[0].modo_ofensivo()
-                    self.equipos[1].pierde_pase(self.indexPasado, self.index)
-                    self.equipos[0].plantel[self.index].dar_pelota()
+                self.equipos[1].plantel[self.index].quitar_pelota()
+                self.indexPasado = self.index
+                self.index       = random.randint(0,10)
+                self.pases[0]   += 1
+                self.cont_pasesE = 0
+                self.equipos[1].modo_defensa()
+                self.equipos[0].modo_ofensivo()
+                self.equipos[1].pierde_pase(self.indexPasado, self.index)
+                self.equipos[0].plantel[self.index].dar_pelota()
 
         if self.cont_pasesE == 4:
             self.cont_pasesE = 0
@@ -180,12 +177,14 @@ class partido:
             self.cont_pasesE += 1
             self.equipos[0].modo_ofensivo()
             self.equipos[0].plantel[self.index].dar_pelota()
+            print(f'{self.equipos[0].plantel[self.index].nombre} RECIBNE LA PELOTA')
 
         else:
             self.defiende     = self.equipos[0].nombreC
             self.cont_pasesE += 1
             self.equipos[1].modo_ofensivo()
             self.equipos[1].plantel[self.index].dar_pelota()
+            print(f'{self.equipos[1].plantel[self.index].nombre} RECIBNE LA PELOTA')
 
     
     def equipo_ganadorDeSorteo(self):

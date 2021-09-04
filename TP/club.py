@@ -5,8 +5,6 @@ class Club:
         self.colores = (color1, color2)
         self.pais = pais
         self.plantel = []
-        self.partidoGanados = 0
-        self.partidoPerdidos = 0
         self.modo = False
         
 
@@ -49,7 +47,3 @@ class Club:
         print(f'''
             {self.plantel[index].dorsal}-{self.plantel[index].nombre} Dispara al arco [  FALLO!!  ] de {self.nombreC}''')
 
-    def actualizar_partidosGanados(self):
-        pass
-    def actualizar_partidosPerdidos(self):
-        pass

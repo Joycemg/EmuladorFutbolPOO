@@ -35,7 +35,10 @@ equipoB = generar_instanciaEquipo('Leones', 'Amarillo', 'Azul', 'Italia', listaN
 primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 5)
 
 primerPartido.mostrar_inicio()
-
+for i in range(0,11):
+    print(i,' ',equipoA.plantel[i].nombre)
+    print(i,' ',equipoB.plantel[i].nombre)
+    
 primerPartido.sorteo_saque()
 primerPartido.equipo_ganadorDeSorteo()
 primerPartido.jugar()

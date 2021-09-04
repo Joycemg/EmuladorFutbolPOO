@@ -38,4 +38,5 @@ primerPartido.mostrar_inicio()
 primerPartido.sorteo_saque()
 primerPartido.equipo_ganadorDeSorteo()
 primerPartido.jugar()
+primerPartido.mostrar_pases()
 # primerPartido.jugar() #Recordatorio metodo agregar defensor 

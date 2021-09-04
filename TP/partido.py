@@ -9,6 +9,7 @@ class partido:
         self.golesF      = [0, 0]
         self.pases       = [0, 0]
         self.equipos     = (equipoA, equipoB)
+        self.expulsados  = []
         self.duracion    = duracion
 
         self.cont_pasesE = 0
@@ -28,6 +29,7 @@ class partido:
         Pais    :   {self.equipos[0].pais}                       {self.equipos[1].pais}
         {'-' * 60}
         ''')
+
         time.sleep(2)
 
 
@@ -59,6 +61,15 @@ class partido:
                 if self.equipos[x].plantel[i].goles == 1:
                     print(f'''
 {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} gol''')
+                if self.equipos[x].plantel[i].tarjetasA == 1:
+                    print(f'''
+{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla
+                    ''')
+                if self.equipos[x].plantel[i].tarjetasR == 1:
+                    print(f'''
+{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasR} una Roja
+                    ''')
+
                 elif self.equipos[x].plantel[i].goles >= 2:
                     print(f'''
 {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} goles''')
@@ -77,7 +88,7 @@ class partido:
 
         
         #Probabilidades
-        self.probabilidadPases  = 5.80
+        self.probabilidadPases  = 0.80 #5
         self.probabilidadGol    = 10.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
@@ -121,6 +132,7 @@ class partido:
                 self.index       = random.randint(0,10)
                 self.pases[1]   += 1
                 self.cont_pasesE = 0
+                self.sanciones()
                 self.equipos[0].modo_defensa()
                 self.equipos[1].modo_ofensivo()
                 self.equipos[1].pierde_pase(self.index, self.indexPasado, self.equipos[0])
@@ -180,6 +192,32 @@ class partido:
 
 
 
+    def sanciones(self):
+        sancion = random.randint(0, 100)
+        if sancion >= 3:
+            if self.equipos[0].modo == True:
+                print(f'{self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} cometio falta a {self.equipos[0].plantel[self.index].dorsal}-{self.equipos[0].plantel[self.indexPasado].nombre}')
+                if self.equipos[1].plantel[self.index].tarjetasA == 1:
+                    self.equipos[1].plantel[self.index].tarjetasR = 1
+                    print(f'{self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} RECIBE ROJA')
+                elif self.equipos[1].plantel[self.index].tarjetasA == 0:
+                    self.equipos[1].plantel[self.index].tarjetasA += 1
+                    print(f'{self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} RECIBE AMARILLA')
+            else:
+                print(f'{self.equipos[0].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} cometio falta a {self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.indexPasado].nombre}')
+                if self.equipos[1].plantel[self.index].tarjetasA == 1:
+                    self.equipos[1].plantel[self.index].tarjetasR = 1
+                    print(f'{self.equipos[0].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} RECIBE ROJA')
+                elif self.equipos[1].plantel[self.index].tarjetasA == 0:
+                    self.equipos[1].plantel[self.index].tarjetasA += 1
+                    print(f'{self.equipos[0].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} RECIBE AMARILLA')
+        else:
+            pass
+
+
+    
+
+
 
     def sorteo_saque(self):
         self.defiende         = ''
@@ -190,16 +228,19 @@ class partido:
             self.cont_pasesE += 1
             self.equipos[0].modo_ofensivo()
             self.equipos[0].plantel[self.index].dar_pelota()
-            print(f'{self.equipos[0].plantel[self.index].nombre} RECIBNE LA PELOTA')
+            print(f'    {self.equipos[0].plantel[self.index].nombre} Saca pelota')
 
         else:
             self.defiende     = self.equipos[0].nombreC
             self.cont_pasesE += 1
             self.equipos[1].modo_ofensivo()
             self.equipos[1].plantel[self.index].dar_pelota()
-            print(f'{self.equipos[1].plantel[self.index].nombre} RECIBNE LA PELOTA')
+            print(f'    {self.equipos[1].plantel[self.index].nombre} Saca pelota')
 
     
+
+
+
     def equipo_ganadorDeSorteo(self):
         print(f'''
         Ganador del sorteo  =    {self.ganador_saque}

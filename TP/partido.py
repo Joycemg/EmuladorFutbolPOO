@@ -4,11 +4,16 @@ class partido:
     def __init__(self, cancha, arbitro, equipoA, equipoB, duracion):
         self.cancha = cancha
         self.arbitro = arbitro
+        self.goles = 0
         self.pases = 0
-        self.gol = 0
-        self.equipos = (equipoA, equipoB)
+        self.equipos = [equipoA, equipoB]
         self.duracion = duracion
 
+        self.cont_pases = 0
+        self.index = 0
+        self.contador = 0
+        self.inicio_partido = time.time()
+        self.tiempo_partido = self.duracion
 
     def mostrar_inicio(self):
         print(f'''
@@ -16,16 +21,18 @@ class partido:
         Arbitro :   {self.arbitro}     
         Cancha  :   {self.cancha}
         {'-' * 60}
-        Equipos :   {self.equipoA.nombreC}         VS           {self.equipoB.nombreC}
-        Colores :   {self.equipoA.colores[0]} | {self.equipoA.colores[1]}                {self.equipoB.colores[0]} | {self.equipoB.colores[1]}
-        Pais    :   {self.equipoA.pais}                       {self.equipoB.pais}
+        Equipos :   {self.equipos[0].nombreC}         VS           {self.equipos[1].nombreC}
+        Colores :   {self.equipos[0].colores[0]} | {self.equipos[0].colores[1]}                {self.equipos[1].colores[0]} | {self.equipos[1].colores[1]}
+        Pais    :   {self.equipos[0].pais}                       {self.equipos[1].pais}
         {'-' * 60}''')
 
-    def mostrar_gol(self):
-        pass
+    # def mostrar_goles(self):
+    #     print(f'''
+    #     {self.gol} goles''')
 
-    def mostrar_pases(self):
-        pass
+    # def mostrar_pases(self):
+    #     print(f'''
+    #     {self.gol} pases exitosos''')
 
     def mostrar_sanciones(self):
         pass
@@ -34,19 +41,15 @@ class partido:
 
         ##Metodo incompleto y nada funcional
     def jugar(self):
-        self.cont_pases = 0
-        self.contador = 0
-        self.inicio_partido = time.time()
-        self.tiempo_partido = self.duracion
-
+    
         #Probabilidades
         self.probabilidadPases = 0.80
-        self.probabilidadGol = 5.20
+        self.probabilidadGol = 10.20
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(1)
-            # self.contador += 1
-            # print(self.contador)
+            self.contador += 1
+            print(self.contador)
 
             if self.hacer_pases(self.probabilidadPases):
                 self.hacer_disparo(self.probabilidadGol)
@@ -56,14 +59,18 @@ class partido:
 
     def hacer_pases(self, probabilidadPases):
         Pases = random.randint(0, 100) * probabilidadPases
-        self.numero = random.randint(0,10)
-        if Pases >= 30:
-            self.equipos[0].plantel[self.numero].agarra_pelota()
-            self.cont_pases += 1
-        else:
-            self.equipos[0].plantel[self.numero].pierde_pelota()
 
+        if Pases >= 40:
+            self.equipos[self.index].agarra_pelota()
+            self.cont_pases += 1
+
+        else:
+            self.equipos[self.index].pierde_pelota()
             self.cont_pases = 0
+            if self.cont_pases == 0:
+                self.index = 0
+            else:
+                self.index = 1
 
         if self.cont_pases == 4:
             self.actualizar_pases()
@@ -74,7 +81,7 @@ class partido:
     def hacer_disparo(self, probabilidadGol):
         disparo = random.randint(0, 100) * probabilidadGol
         if disparo >= 50:
-            self.actualizar_gol()
+            self.actualizar_goles()
             print('                     GOOOL')
         else:
 
@@ -94,8 +101,8 @@ class partido:
 
 
 
-    def actualizar_gol(self):
-        self.gol += 1
+    def actualizar_goles(self):
+        self.goles += 1
 
     def actualizar_pases(self):
         self.pases += 1

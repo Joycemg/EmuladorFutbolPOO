@@ -7,8 +7,8 @@ class Club:
         self.plantel = []
         self.partidoGanados = 0
         self.partidoPerdidos = 0
-        # self.local = False
-    
+        self.local = False
+        self.pelota = False
 
     def comprar_jugador(self, jugadores):
         self.plantel.append(jugadores)
@@ -31,6 +31,17 @@ class Club:
 
     def estado_defensa(self):
         self.local = False
+
+    def agarra_pelota(self):
+        self.pelota = True
+        print(f'''
+        {self.nombreC} tiene la pelota''')
+        
+    def pierde_pelota(self):
+        self.pelota = False
+        print(f'''
+        {self.nombreC} pierde la pelota''')
+
 
     def actualizar_partidosGanados(self):
         pass

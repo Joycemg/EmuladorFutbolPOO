@@ -83,7 +83,6 @@ class partido:
     def hacer_pases(self, probabilidadPases):
         Pases = random.randint(0, 100) * probabilidadPases
 
-
         if Pases >= 60:
             if self.equipos[0].modo == True:
                 self.equipos[0].plantel[self.index].quitar_pelota()
@@ -112,7 +111,7 @@ class partido:
                 self.cont_pasesE = 0
                 self.equipos[0].modo_defensa()
                 self.equipos[1].modo_ofensivo()
-                self.equipos[0].pierde_pase(self.indexPasado, self.index)
+                self.equipos[1].pierde_pase(self.index, self.indexPasado, self.equipos[0])
                 self.equipos[1].plantel[self.index].dar_pelota()
 
             else:
@@ -123,7 +122,7 @@ class partido:
                 self.cont_pasesE = 0
                 self.equipos[1].modo_defensa()
                 self.equipos[0].modo_ofensivo()
-                self.equipos[1].pierde_pase(self.indexPasado, self.index)
+                self.equipos[0].pierde_pase(self.index, self.indexPasado, self.equipos[1])
                 self.equipos[0].plantel[self.index].dar_pelota()
 
         if self.cont_pasesE == 4:

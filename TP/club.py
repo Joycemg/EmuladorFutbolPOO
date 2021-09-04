@@ -35,10 +35,10 @@ class Club:
             {self.nombreC} tiene la pelota
             {self.plantel[indexPasado].dorsal}-{self.plantel[indexPasado].nombre} se la paso a {self.plantel[index].dorsal}-{self.plantel[index].nombre}''')
 
-    def pierde_pase(self, indexPasado, index):
+    def pierde_pase(self, index, indexPasado, equipo):
         print(f'''
             {self.nombreC} pierde la pelota
-            {self.plantel[index].dorsal}-{self.plantel[index].nombre} se la quito a {self.plantel[indexPasado].dorsal}-{self.plantel[indexPasado].nombre}''')
+            {self.plantel[index].dorsal}-{self.plantel[index].nombre} se la quito a {equipo.plantel[indexPasado].dorsal}-{equipo.plantel[indexPasado].nombre}''')
 
     def golazo(self, index):
         print(f'''

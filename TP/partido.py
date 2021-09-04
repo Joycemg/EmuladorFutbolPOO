@@ -4,7 +4,7 @@ class partido:
     def __init__(self, cancha, arbitro, equipoA, equipoB, duracion):
         self.cancha = cancha
         self.arbitro = arbitro
-        self.goles = 0
+        self.goles = [0, 0]
         self.pases = [0, 0]
         self.equipos = [equipoA, equipoB]
         self.duracion = duracion
@@ -13,26 +13,42 @@ class partido:
 
     def mostrar_inicio(self):
         print(f'''
+        {'-' * 60}''')
+        print(f'''
         Duracion:   {self.duracion} minutos     
         Arbitro :   {self.arbitro}     
         Cancha  :   {self.cancha}
         {'-' * 60}
-        Equipos :   {self.equipos[0].nombreC}         VS           {self.equipos[1].nombreC}
+        Equipos :   {self.equipos[0].nombreC}         VS            {self.equipos[1].nombreC}
         Colores :   {self.equipos[0].colores[0]} | {self.equipos[0].colores[1]}                {self.equipos[1].colores[0]} | {self.equipos[1].colores[1]}
         Pais    :   {self.equipos[0].pais}                       {self.equipos[1].pais}
         {'-' * 60}''')
 
-    # def mostrar_goles(self):
-    #     print(f'''
-    #     {self.gol} goles''')
-
+    def mostrar_ganador(self):
+        print('-'*40)
+        print(f'            {self.equipos[0].nombreC}   [{self.goles[0]}]')
+        print(f'            {self.equipos[1].nombreC}   [{self.goles[1]}]')
+        if self.goles[0] == self.goles[1]:
+            print(f'                        Los equipos empataron      ')
+        elif self.goles[0] < self.goles[1]:
+            print(f'            {self.equipos[1].nombreC}  Gano')
+        else:
+            print(f'            {self.equipos[0].nombreC}  Gano')
+        print('-'*40)     
+    def mostrar_goles(self):
+        print(f'''{self.equipos[0].nombreC} realizaron {self.goles[0]} goles''')
+        print(f'''{self.equipos[1].nombreC} realizaron {self.goles[1]} goles''')
     def mostrar_pases(self):
-        print(f'''
-            {self.equipos[0].nombreC}     realizo     {self.pases[0]} pases''')
-        print(f'''
-            {self.equipos[1].nombreC}     realizo     {self.pases[1]} pases''')
+        print(f'''{self.equipos[0].nombreC}     realizo     {self.pases[0]} pases''')
+        print(f'''{self.equipos[1].nombreC}     realizo     {self.pases[1]} pases''')
+    def mostrar_info(self):
+        print(f'Equipo:    {self.equipos[0].nombreC}    Goles: [{self.goles[0]}]    Pases: [{self.pases[0]}] ')
+        print(f'Equipo:    {self.equipos[1].nombreC}    Goles: [{self.goles[1]}]    Pases: [{self.pases[1]}]')
+        pass
 
     def mostrar_sanciones(self):
+
+
         pass
 
 
@@ -47,8 +63,8 @@ class partido:
 
         
         #Probabilidades
-        self.probabilidadPases = 0.80
-        self.probabilidadGol = 10.20
+        self.probabilidadPases = 10.80
+        self.probabilidadGol = 100.20
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(1)
@@ -98,10 +114,18 @@ class partido:
 
         disparo = random.randint(0, 100) * probabilidadGol
         if disparo >= 50:
-            print('                     GOOOL')
+            if self.equipos[0].modo == True:
+                self.goles[0] += 1
+                print(f'GOOOL DE {self.equipos[0].nombreC}')
+            else:
+                print(f'GOOOL DE {self.equipos[1].nombreC}')
+                self.goles[1] += 1
         else:
+            if self.equipos[0].modo == True:
+               print(f'{self.equipos[0].nombreC} fallaron un gol')
+            else:
+                print(f'{self.equipos[1].nombreC} fallaron un gol')
 
-            print('                     FALLO')
 
     def sorteo_saque(self):
         self.ganador_saque = random.choice(self.equipos)

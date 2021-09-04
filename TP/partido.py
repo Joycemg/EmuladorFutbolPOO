@@ -32,18 +32,17 @@ class partido:
 
 
     def mostrar_ganador(self):
-        print(f'            {self.equipos[0].nombreC}   [{self.goles[0]}]')
-        print(f'            {self.equipos[1].nombreC}   [{self.goles[1]}]')
+        print(f'''            
+        {self.equipos[0].nombreC}   [{self.goles[0]}]''')
+        print(f'''            
+        {self.equipos[1].nombreC}   [{self.goles[1]}]''')
         if self.goles[0] == self.goles[1]:
-            print(f'''            
-                        Los equipos empataron     ''')
+            print(f''' Los equipos empataron     ''')
         elif self.goles[0] < self.goles[1]:
             print(' ')
-            print(f'''           
-        {self.equipos[1].nombreC}  Gano''')
+            print(f''' {self.equipos[1].nombreC}  Gano''')
         else:
-            print(f'''            
-        {self.equipos[0].nombreC}  Gano''')
+            print(f''' {self.equipos[0].nombreC}  Gano''')
         print('-'*40)     
     def mostrar_goles(self):
         print(f'''{self.equipos[0].nombreC} realizaron {self.goles[0]} goles''')
@@ -88,6 +87,7 @@ class partido:
 
             if self.hacer_pases(self.probabilidadPases):
                 self.hacer_disparo(self.probabilidadGol)
+
             else:
                 pass
 

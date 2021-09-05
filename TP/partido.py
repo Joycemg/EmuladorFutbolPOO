@@ -15,6 +15,8 @@ class partido:
 
         self.cont_pasesE = 0
         self.index       = 0
+        self.indexA      = [0,1,2,3,4,5,6,7,8,9,10]
+        self.indexB      = [0,1,2,3,4,5,6,7,8,9,10]
         self.indexPasado = 0
 
     def mostrar_inicio(self):
@@ -111,7 +113,7 @@ class partido:
             if self.equipos[0].modo == True:
                 self.equipos[0].plantel[self.index].quitar_pelota()
                 self.indexPasado  = self.index
-                self.index        = random.randint(0,10)
+                self.index        = random.choice(self.indexA)
                 self.pases[0]    += 1
                 self.cont_pasesE += 1
                 self.equipos[0].plantel[self.index].dar_pelota()
@@ -120,7 +122,7 @@ class partido:
             else:
                 self.equipos[1].plantel[self.index].quitar_pelota()
                 self.indexPasado = self.index
-                self.index       = random.randint(0,10)
+                self.index       = random.choice(self.indexB)
                 self.pases[1]    += 1
                 self.cont_pasesE += 1
                 self.equipos[1].da_pase(self.indexPasado, self.index)
@@ -130,7 +132,7 @@ class partido:
             if self.equipos[0].modo == True:
                 self.equipos[0].plantel[self.index].quitar_pelota()
                 self.indexPasado = self.index
-                self.index       = random.randint(0,10)
+                self.index       = random.choice(self.indexA)
                 self.pases[1]   += 1
                 self.cont_pasesE = 0
                 self.equipos[0].modo_defensa()
@@ -141,7 +143,7 @@ class partido:
             else:
                 self.equipos[1].plantel[self.index].quitar_pelota()
                 self.indexPasado = self.index
-                self.index       = random.randint(0,10)
+                self.index       = random.choice(self.indexB)
                 self.pases[0]   += 1
                 self.cont_pasesE = 0
                 self.equipos[1].modo_defensa()

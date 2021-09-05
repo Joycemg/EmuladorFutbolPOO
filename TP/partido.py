@@ -89,8 +89,8 @@ class partido:
 
         
         #Probabilidades
-        self.probabilidadPases  = 5.80 #5
-        self.probabilidadGol    = 1.80
+        self.probabilidadPases  = 1.80 #5
+        self.probabilidadGol    = 0.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(0.1)
@@ -228,14 +228,12 @@ class partido:
             self.cont_pasesE += 1
             self.equipos[0].modo_ofensivo()
             self.equipos[0].plantel[self.index].dar_pelota()
-            self.equipos[1].plantel[self.index].saca_pelota()
 
         else:
             self.defiende     = self.equipos[0].nombreC
             self.cont_pasesE += 1
             self.equipos[1].modo_ofensivo()
             self.equipos[1].plantel[self.index].dar_pelota()
-            self.equipos[1].plantel[self.index].saca_pelota()
 
     
 

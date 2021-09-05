@@ -30,33 +30,29 @@ class Club:
     def modo_defensa(self):
         self.modo = False
 
-    def saca_pelota(self):
-        print(f'         {self.plantel.nombre} Saca pelota')
-
     def da_pase(self, indexPasado, index):
         show(f'''
             ---
-            |{self.plantel[indexPasado].dorsal}|{self.plantel[indexPasado].nombre}({self.nombreC}) se la paso a su compañero|{self.plantel[index].dorsal}|{self.plantel[index].nombre}
+            |{self.plantel[indexPasado].dorsal}|{self.plantel[indexPasado].nombre}({self.nombreC}) se la paso a su compañero |{self.plantel[index].dorsal}|{self.plantel[index].nombre}
             ---
-            ''', vd=0.015)
+            ''', vd=0.006)
 
     def pierde_pase(self, index, indexPasado, equipo):
 
         show(f'''
-            {self.nombreC} pierde la pelota
-
-            {self.plantel[index].dorsal}-{self.plantel[index].nombre}[{self.plantel[index].dorsal}] se la quito a {equipo.plantel[indexPasado].dorsal}-{equipo.plantel[indexPasado].nombre}
-            
-            ''', vd=0.015)
+            ---
+            {self.plantel[index].dorsal}-{self.plantel[index].nombre}[{self.plantel[index].dorsal}]({self.plantel[index].equipo}) se la quito a {equipo.plantel[indexPasado].dorsal}-{equipo.plantel[indexPasado].nombre}({equipo.plantel[indexPasado].equipo})
+            ---
+            ''', vd=0.006)
 
     def golazo(self, index):
         show(f'''
             {self.plantel[index].dorsal}-{self.plantel[index].nombre} Dispara al arco [  GOOOOOL!!] de {self.nombreC}
             
-            ''', vd=0.020)
+            ''', vd=0.015)
     def fallazo(self, index):
         show(f'''
             {self.plantel[index].dorsal}-{self.plantel[index].nombre} Dispara al arco [  FALLO!!  ] de {self.nombreC}
             
-            ''', vd=0.020)
+            ''', vd=0.015)
 

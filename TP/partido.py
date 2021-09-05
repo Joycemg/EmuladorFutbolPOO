@@ -59,29 +59,54 @@ class partido:
         print(f'Equipo:    {self.equipos[0].nombreC}    Goles: [{self.goles[0]}] Goles Fallidos: [{self.golesF[0]}]    Pases: [{self.pases[0]}]')
         print(f'Equipo:    {self.equipos[1].nombreC}    Goles: [{self.goles[1]}] Goles Fallidos: [{self.golesF[1]}]    Pases: [{self.pases[1]}]')
 
-        for x in range(0,2):
-            for i in range(0,11):
-                if self.equipos[x].plantel[i].goles == 1:
-                    print(f'''
-{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} gol''')
-                if self.equipos[x].plantel[i].tarjetasA == 1:
-                    print(f'''
-{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla
-                    ''')
-                if self.equipos[x].plantel[i].tarjetasR == 1:
-                    print(f'''
-{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasR} una Roja
-                    ''')
+#         for x in range(0,2):
+#             for i in range(0,11):
+#                 if self.equipos[x].plantel[i].goles == 1:
+#                     print(f'''
+# {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} gol''')
+#                 if self.equipos[x].plantel[i].tarjetasA == 1:
+#                     print(f'''
+# {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla
+#                     ''')
+#                 if self.equipos[x].plantel[i].tarjetasR == 1:
+#                     print(f'''
+# {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasR} una Roja
+#                     ''')
 
-                elif self.equipos[x].plantel[i].goles >= 2:
-                    print(f'''
-{self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} goles''')
-    def mostrar_sanciones(self):
+#                 elif self.equipos[x].plantel[i].goles >= 2:
+#                     print(f'''
+# {self.equipos[x].nombreC} > |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} goles''')
+#     def mostrar_sanciones(self):
+
+   
+        for i in range(0,2):
+            if self.goles[i] == 0:
+                continue
+            print(f'    ---Goles del equipo {self.equipos[i].nombreC}')
+            for x in range(0,11):
+                if self.equipos[i].plantel[x].goles == 1:
+                    print(f'''|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} gol''')
+                elif self.equipos[i].plantel[x].goles > 1:
+                    print(f'''|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} goles''')
+
+
+
         for x in range(0,2):
-            for i in self.expulsados[x]:
-                print(f'''{self.equipos[x].plantel[i].nombre}
+            if self.goles[x] == 0:
+                continue
+            print(f'    ---Goles del equipo {self.equipos[i].nombreC}')
+            for i in range(0,11):
+                if self.equipos[x].plantel[i].tarjetasA == 1:
+                    print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla')
+                if self.equipos[x].plantel[i].tarjetasA > 1:
+                    print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarillas')        
         
-        ''')
+        for x in range(0,2):
+            if self.expulsados[x] == None:
+                continue
+            print(f'   ---Jugadores expulsados {self.equipos[x].nombreC}')
+            for i in self.expulsados[x]:
+                print(f'''{self.equipos[x].plantel[i].equipo}  |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre}''')
 
 
         ##Metodo incompleto y nada funcional
@@ -93,7 +118,7 @@ class partido:
         
         #Probabilidades
         self.probabilidadPases  = 1.00 #5
-        self.probabilidadGol    = 0.80
+        self.probabilidadGol    = 1.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(0.1)
@@ -131,20 +156,26 @@ class partido:
                 self.index       = random.choice(self.indexA)
                 self.pases[1]   += 1
                 self.cont_pasesE = 0
-                self.equipos[0].modo_defensa()
-                self.equipos[1].modo_ofensivo()
                 self.equipos[1].pierde_pase(self.index, self.indexPasado, self.equipos[0])
-                self.sanciones()
+                if self.sanciones():
+                    self.equipos[0].modo_defensa()
+                    self.equipos[1].modo_ofensivo()
+                else:
+                    self.index        = random.choice(self.indexA)
+                    self.equipos[0].saca(self.indexPasado, self.index)
 
             else:
                 self.indexPasado = self.index
                 self.index       = random.choice(self.indexB)
                 self.pases[0]   += 1
                 self.cont_pasesE = 0
-                self.equipos[1].modo_defensa()
-                self.equipos[0].modo_ofensivo()
                 self.equipos[0].pierde_pase(self.index, self.indexPasado, self.equipos[1])
-                self.sanciones()
+                if self.sanciones():
+                    self.equipos[1].modo_defensa()
+                    self.equipos[0].modo_ofensivo()
+                else:
+                    self.index        = random.choice(self.indexB)
+                    self.equipos[1].saca(self.indexPasado, self.index)
 
         if self.cont_pasesE == 4:
             self.cont_pasesE = 0
@@ -183,9 +214,10 @@ class partido:
 
     def sanciones(self):
         sancion = random.randint(0, 100)
-        if sancion >= 3:
+        if sancion >= 12:
             if self.equipos[0].modo == True:
-                print(f'{self.equipos[0].plantel[self.index].dorsal}-{self.equipos[0].plantel[self.index].nombre} cometio falta a {self.equipos[1].plantel[self.indexPasado].dorsal}-{self.equipos[1].plantel[self.indexPasado].nombre}')
+                self.equipos[1].falta(self.index, self.indexPasado, self.equipos[0])
+                # print(f'{self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} cometio falta a {self.equipos[0].plantel[self.indexPasado].dorsal}-{self.equipos[0].plantel[self.indexPasado].nombre}')
                 if self.equipos[1].plantel[self.index].tarjetasA == 1:
                     self.equipos[1].plantel[self.index].tarjetasA += 1
                     self.equipos[1].plantel[self.index].tarjetasR = 1
@@ -196,12 +228,12 @@ class partido:
                 if self.equipos[1].plantel[self.index].tarjetasR == 1:
                     self.indexB.pop(self.index)
                     self.expulsados[1].append(self.index)
-                    print(self.expulsados)
-                    
+                    self.equipos[1].expulsion(self.index)
 
             
             else:
-                print(f'{self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} cometio falta a {self.equipos[0].plantel[self.indexPasado].dorsal}-{self.equipos[0].plantel[self.indexPasado].nombre}')
+                self.equipos[0].falta(self.index, self.indexPasado, self.equipos[1])
+                # print(f'{self.equipos[0].plantel[self.index].dorsal}-{self.equipos[0].plantel[self.index].nombre} cometio falta a {self.equipos[1].plantel[self.indexPasado].dorsal}-{self.equipos[1].plantel[self.indexPasado].nombre}')
                 if self.equipos[0].plantel[self.index].tarjetasA == 1:
                     self.equipos[0].plantel[self.index].tarjetasA += 1
                     self.equipos[0].plantel[self.index].tarjetasR = 1
@@ -211,16 +243,11 @@ class partido:
                 if self.equipos[0].plantel[self.index].tarjetasR == 1:
                     self.indexA.pop(self.index)
                     self.expulsados[0].append(self.index)
-                    print(self.expulsados)
+                    self.equipos[0].expulsion(self.index)
+                    print(self.expulsados) 
+
         else:
-            if self.equipos[0].modo == True:
-                self.equipos[0].modo_defensa()
-                self.equipos[1].modo_ofensivo()
-            else:
-                self.equipos[1].modo_defensa()
-                self.equipos[0].modo_ofensivo()
-
-
+            return True
     
 
 

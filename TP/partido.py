@@ -82,7 +82,7 @@ class partido:
         for i in range(0,2):
             if self.goles[i] == 0:
                 continue
-            print(f'    ---Goles del equipo {self.equipos[i].nombreC}')
+            print(f'    Goles del equipo {self.equipos[i].nombreC}')
             for x in range(0,11):
                 if self.equipos[i].plantel[x].goles == 1:
                     print(f'''|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} gol''')
@@ -102,7 +102,7 @@ class partido:
         #             print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarillas')        
         
         for x in range(0,2):
-            print(f'   ---Jugadores expulsados {self.equipos[x].nombreC}')
+            print(f'    Jugadores expulsados {self.equipos[x].nombreC}')
             for i in self.expulsados[x]:
                 print(f'''{self.equipos[x].plantel[i].equipo}  |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre}''')
 
@@ -115,7 +115,7 @@ class partido:
 
         
         #Probabilidades
-        self.probabilidadPases  = 1.00 #5
+        self.probabilidadPases  = 2.00 #5
         self.probabilidadGol    = 1.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:

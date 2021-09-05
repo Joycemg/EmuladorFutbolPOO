@@ -1,5 +1,5 @@
+# Ezequiel Diaz | Marcelo Cabral | Marcos Wamba
 import time
-import os
 import shutil
 def show(variable, vd = 0.005): # Estilo del print
     for letra in variable:

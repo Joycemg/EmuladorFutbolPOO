@@ -1,3 +1,4 @@
+# Ezequiel Diaz | Marcelo Cabral | Marcos Wamba
 class Jugador:
     def __init__(self, nombre, edad, pais, dorsal, equipo):
         self.nombre = nombre
@@ -5,7 +6,7 @@ class Jugador:
         self.pais = pais
         self.dorsal = dorsal
         self.equipo = equipo
-        self.tarjetasA =  0
+        self.tarjetasA = 0
         self.tarjetasR = 0
         self.goles = 0
         self.golesFallidos = 0

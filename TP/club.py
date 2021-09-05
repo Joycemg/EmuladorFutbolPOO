@@ -1,3 +1,4 @@
+# Ezequiel Diaz | Marcelo Cabral | Marcos Wamba
 from funciones import show
 class Club:
     def __init__(self, nombreC, color1, color2, pais):
@@ -67,3 +68,12 @@ class Club:
         show(f'''
             |{self.plantel[index].dorsal}|{self.plantel[index].nombre}({self.plantel[index].equipo}) Fue expulsado del juego
         ''', vd=0.030)
+    def recibio_tarjA(self, index):
+        show(f'''
+            |{self.plantel[index].dorsal}|{self.plantel[index].nombre}({self.plantel[index].equipo}) Recibio amarilla
+        ''', vd=0.030)
+
+    def recibio_tarjR(self, index):
+        show(f'''
+            |{self.plantel[index].dorsal}|{self.plantel[index].nombre}({self.plantel[index].equipo}) Recibio ROJA
+        ''', vd=0.040)        

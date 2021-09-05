@@ -1,4 +1,4 @@
-#M
+# Ezequiel Diaz | Marcelo Cabral | Marcos Wamba
 import random
 import time
 from club import Club
@@ -34,7 +34,7 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
 equipoA = generar_instanciaEquipo('Argentina', 'Rojo', 'Blanco', 'irlandia', listaNombres, listaPaises)
 equipoB = generar_instanciaEquipo('Venezuela', 'Amarillo', 'Azul', 'Alemania', listaNombres, listaPaises)
 
-primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 70)
+primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 45)
 
 primerPartido.mostrar_inicio()
 primerPartido.sorteo_saque()

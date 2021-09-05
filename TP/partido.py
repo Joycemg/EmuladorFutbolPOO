@@ -1,4 +1,4 @@
-import shutil
+# Ezequiel Diaz | Marcelo Cabral | Marcos Wamba
 import random
 import time
 from funciones import centrar
@@ -18,6 +18,7 @@ class partido:
         self.indexA      = [0,1,2,3,4,5,6,7,8,9,10]
         self.indexB      = [0,1,2,3,4,5,6,7,8,9,10]
         self.indexPasado = 0
+        self.falta = False
 
     def mostrar_inicio(self):
         print(f'''
@@ -35,7 +36,6 @@ Pais    :   {self.equipos[0].pais}                          {self.equipos[1].pai
 
 
     def mostrar_ganador(self):
-        cols, rows = shutil.get_terminal_size()
         print('')
         centrar('-'*40) 
         centrar(f'{self.equipos[0].nombreC}[{self.goles[0]}] [{self.goles[1]}]{self.equipos[1].nombreC}')
@@ -72,24 +72,24 @@ Pais    :   {self.equipos[0].pais}                          {self.equipos[1].pai
                 elif self.equipos[i].plantel[x].goles > 1:
                     centrar(f'|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} goles')
 
+        if self.falta == True:
+            print(f'Tarjetas de {self.equipos[i].nombreC}')
+
+            for x in range(0, 2):
+                for i in range(0, 11):
+                    if self.equipos[x].plantel[i].tarjetasA == 1:
+                        print(f' |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla')
+                    elif self.equipos[x].plantel[i].tarjetasA > 2:
+                        print(f' |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarillas')
 
 
-        # for x in range(0,2):
-        #     if self.tarjetasA[x] == 0:
-        #         continue
-        #     print(f'    ---tarjetas {self.equipos[i].nombreC}')
-        #     for i in range(0,11):
-        #         if self.equipos[x].plantel[i].tarjetasA == 1:
-        #             print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla')
-        #         if self.equipos[x].plantel[i].tarjetasA > 1:
-        #             print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarillas')        
-        
         for x in range(0,2):
             if self.expulsados[x] == []:
                 continue
-            print(f'    Jugadores expulsados {self.equipos[x].nombreC}')
+            print(f'Jugadores expulsados {self.equipos[x].nombreC}')
             for i in self.expulsados[x]:
-                print(f'''{self.equipos[x].plantel[i].equipo}  |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre}''')
+                print(f' |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre}')
+
 
 
         ##Metodo incompleto y nada funcional
@@ -100,8 +100,8 @@ Pais    :   {self.equipos[0].pais}                          {self.equipos[1].pai
 
         
         #Probabilidades
-        self.probabilidadPases  = 0.00 #5
-        self.probabilidadGol    = 10.80
+        self.probabilidadPases  = 4.00 #5
+        self.probabilidadGol    = 2.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(0.1)
@@ -196,39 +196,43 @@ Pais    :   {self.equipos[0].pais}                          {self.equipos[1].pai
 
     def sanciones(self):
         sancion = random.randint(0, 100)
-        if sancion >= 1:
+        if sancion >= 75:
             if self.equipos[0].modo == True:
                 self.equipos[1].falta(self.index, self.indexPasado, self.equipos[0])
-                if self.equipos[1].plantel[self.index].tarjetasA == 1:
+                if self.equipos[1].plantel[self.index].tarjetasA == 1 or sancion > 90:
                     self.equipos[1].plantel[self.index].tarjetasA += 1
                     self.equipos[1].plantel[self.index].tarjetasR = 1
+                    self.equipos[1].recibio_tarjA(self.index)
+                    self.equipos[1].recibio_tarjR(self.index)
 
                 else:
                    self.equipos[1].plantel[self.index].tarjetasA += 1
+                   self.equipos[1].recibio_tarjA(self.index)
 
                 if self.equipos[1].plantel[self.index].tarjetasR == 1:
                     self.indexB.pop(self.index)
                     self.expulsados[1].append(self.index)
                     self.equipos[1].expulsion(self.index)
-                    print(self.expulsados)
-                    print(self.indexB)
 
-            
+        
+
             else:
                 self.equipos[0].falta(self.index, self.indexPasado, self.equipos[1])
-                if self.equipos[0].plantel[self.index].tarjetasA == 1:
+                if self.equipos[0].plantel[self.index].tarjetasA == 1 or sancion > 90:
                     self.equipos[0].plantel[self.index].tarjetasA += 1
                     self.equipos[0].plantel[self.index].tarjetasR = 1
+                    self.equipos[0].recibio_tarjA(self.index)
+                    self.equipos[0].recibio_tarjR(self.index)
                 else:
                    self.equipos[0].plantel[self.index].tarjetasA += 1
+                   self.equipos[0].recibio_tarjA(self.index)
 
                 if self.equipos[0].plantel[self.index].tarjetasR == 1:
                     self.indexA.pop(self.index)
                     self.expulsados[0].append(self.index)
                     self.equipos[0].expulsion(self.index)
-                    print(self.expulsados)
-                    print(self.indexA)
 
+            self.falta = True
         else:
             return True
     

@@ -1,7 +1,7 @@
-
+import shutil
 import random
 import time
-from funciones import show
+from funciones import centrar
 class partido:
     def __init__(self, cancha, arbitro, equipoA, equipoB, duracion):
         self.cancha      = cancha
@@ -20,74 +20,57 @@ class partido:
         self.indexPasado = 0
 
     def mostrar_inicio(self):
-        show(f'''
-        {'-' * 60}''')
         print(f'''
-        Duracion:   {self.duracion} minutos     
-        Arbitro :   {self.arbitro}     
-        Cancha  :   {self.cancha}
-        {'-' * 60}
-        Equipos :   {self.equipos[0].nombreC}         VS            {self.equipos[1].nombreC}
-        Colores :   {self.equipos[0].colores[0]} | {self.equipos[0].colores[1]}                {self.equipos[1].colores[0]} | {self.equipos[1].colores[1]}
-        Pais    :   {self.equipos[0].pais}                       {self.equipos[1].pais}
-        {'-' * 60}
-        ''')
-
+{'-' * 60}
+Duracion:   {self.duracion} minutos     
+Arbitro :   {self.arbitro}     
+Cancha  :   {self.cancha}
+{'-' * 60}
+Equipos :   {self.equipos[0].nombreC}           VS            {self.equipos[1].nombreC}
+Colores :   {self.equipos[0].colores[0]} | {self.equipos[0].colores[1]}                     {self.equipos[1].colores[0]} | {self.equipos[1].colores[1]}
+Pais    :   {self.equipos[0].pais}                          {self.equipos[1].pais}
+{'-' * 60}
+''')
         time.sleep(2)
 
 
     def mostrar_ganador(self):
-        show(f'''            
-        {self.equipos[0].nombreC}   [{self.goles[0]}]''')
-        show(f'''            
-        {self.equipos[1].nombreC}   [{self.goles[1]}]''')
+        cols, rows = shutil.get_terminal_size()
+        print('')
+        centrar('-'*40) 
+        centrar(f'{self.equipos[0].nombreC}[{self.goles[0]}] [{self.goles[1]}]{self.equipos[1].nombreC}')
+
         if self.goles[0] == self.goles[1]:
-            print(f''' Los equipos empataron     ''')
+            centrar('Los equipos empataron')
         elif self.goles[0] < self.goles[1]:
-            print(' ')
-            print(f'''      {self.equipos[1].nombreC}  Gano''')
+            centrar(f'{self.equipos[1].nombreC}  Gano')
         else:
-            print(f'''      {self.equipos[0].nombreC}  Gano''')
-        print('-'*40)     
+            centrar(f'{self.equipos[0].nombreC}  Gano')
+
     def mostrar_goles(self):
-        print(f'''{self.equipos[0].nombreC} realizaron {self.goles[0]} goles''')
-        print(f'''{self.equipos[1].nombreC} realizaron {self.goles[1]} goles''')
+        centrar(f'{self.equipos[0].nombreC} realizaron {self.goles[0]} goles')
+        centrar(f'{self.equipos[1].nombreC} realizaron {self.goles[1]} goles')
     def mostrar_pases(self):
-        print(f'''{self.equipos[0].nombreC}     realizo     {self.pases[0]} pases''')
-        print(f'''{self.equipos[1].nombreC}     realizo     {self.pases[1]} pases''')
+        centrar(f'{self.equipos[0].nombreC}     realizo     {self.pases[0]} pases')
+        centrar(f'{self.equipos[1].nombreC}     realizo     {self.pases[1]} pases')
     def mostrar_info(self):
-        print(f'Equipo:    {self.equipos[0].nombreC}    Goles: [{self.goles[0]}] Goles Fallidos: [{self.golesF[0]}]    Pases: [{self.pases[0]}]')
-        print(f'Equipo:    {self.equipos[1].nombreC}    Goles: [{self.goles[1]}] Goles Fallidos: [{self.golesF[1]}]    Pases: [{self.pases[1]}]')
+        centrar('-'*40)
+        centrar(f'{self.equipos[0].nombreC}    Goles: [{self.goles[0]}] Goles Fallidos: [{self.golesF[0]}]    Pases: [{self.pases[0]}]')
+        centrar(f'{self.equipos[1].nombreC}    Goles: [{self.goles[1]}] Goles Fallidos: [{self.golesF[1]}]    Pases: [{self.pases[1]}]')
 
-#         for x in range(0,2):
-#             for i in range(0,11):
-#                 if self.equipos[x].plantel[i].goles == 1:
-#                     print(f'''
-# {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} gol''')
-#                 if self.equipos[x].plantel[i].tarjetasA == 1:
-#                     print(f'''
-# {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla
-#                     ''')
-#                 if self.equipos[x].plantel[i].tarjetasR == 1:
-#                     print(f'''
-# {self.equipos[x].nombreC} > {self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasR} una Roja
-#                     ''')
-
-#                 elif self.equipos[x].plantel[i].goles >= 2:
-#                     print(f'''
-# {self.equipos[x].nombreC} > |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre} hizo {self.equipos[x].plantel[i].goles} goles''')
-#     def mostrar_sanciones(self):
 
    
         for i in range(0,2):
             if self.goles[i] == 0:
                 continue
-            print(f'    Goles del equipo {self.equipos[i].nombreC}')
+            centrar('-'*40)
+            centrar(f'Goles del equipo {self.equipos[i].nombreC}')
+            centrar('-'*40)
             for x in range(0,11):
                 if self.equipos[i].plantel[x].goles == 1:
-                    print(f'''|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} gol''')
+                    centrar(f'|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} gol')
                 elif self.equipos[i].plantel[x].goles > 1:
-                    print(f'''|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} goles''')
+                    centrar(f'|{self.equipos[i].plantel[x].dorsal}|{self.equipos[i].plantel[x].nombre} hizo {self.equipos[i].plantel[x].goles} goles')
 
 
 
@@ -102,6 +85,8 @@ class partido:
         #             print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarillas')        
         
         for x in range(0,2):
+            if self.expulsados[x] == []:
+                continue
             print(f'    Jugadores expulsados {self.equipos[x].nombreC}')
             for i in self.expulsados[x]:
                 print(f'''{self.equipos[x].plantel[i].equipo}  |{self.equipos[x].plantel[i].dorsal}|{self.equipos[x].plantel[i].nombre}''')
@@ -115,14 +100,13 @@ class partido:
 
         
         #Probabilidades
-        self.probabilidadPases  = 2.00 #5
-        self.probabilidadGol    = 1.80
+        self.probabilidadPases  = 0.00 #5
+        self.probabilidadGol    = 10.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(0.1)
             # contador += 1
             # print(contador)
-
             if self.hacer_pases(self.probabilidadPases):
                 self.hacer_disparo(self.probabilidadGol)
 
@@ -151,7 +135,7 @@ class partido:
         else:
             if self.equipos[0].modo == True:
                 self.indexPasado = self.index
-                self.index       = random.choice(self.indexA)
+                self.index       = random.choice(self.indexB)
                 self.pases[1]   += 1
                 self.cont_pasesE = 0
                 self.equipos[1].pierde_pase(self.index, self.indexPasado, self.equipos[0])
@@ -164,7 +148,7 @@ class partido:
 
             else:
                 self.indexPasado = self.index
-                self.index       = random.choice(self.indexB)
+                self.index       = random.choice(self.indexA)
                 self.pases[0]   += 1
                 self.cont_pasesE = 0
                 self.equipos[0].pierde_pase(self.index, self.indexPasado, self.equipos[1])
@@ -212,10 +196,9 @@ class partido:
 
     def sanciones(self):
         sancion = random.randint(0, 100)
-        if sancion >= 12:
+        if sancion >= 1:
             if self.equipos[0].modo == True:
                 self.equipos[1].falta(self.index, self.indexPasado, self.equipos[0])
-                # print(f'{self.equipos[1].plantel[self.index].dorsal}-{self.equipos[1].plantel[self.index].nombre} cometio falta a {self.equipos[0].plantel[self.indexPasado].dorsal}-{self.equipos[0].plantel[self.indexPasado].nombre}')
                 if self.equipos[1].plantel[self.index].tarjetasA == 1:
                     self.equipos[1].plantel[self.index].tarjetasA += 1
                     self.equipos[1].plantel[self.index].tarjetasR = 1
@@ -227,11 +210,12 @@ class partido:
                     self.indexB.pop(self.index)
                     self.expulsados[1].append(self.index)
                     self.equipos[1].expulsion(self.index)
+                    print(self.expulsados)
+                    print(self.indexB)
 
             
             else:
                 self.equipos[0].falta(self.index, self.indexPasado, self.equipos[1])
-                # print(f'{self.equipos[0].plantel[self.index].dorsal}-{self.equipos[0].plantel[self.index].nombre} cometio falta a {self.equipos[1].plantel[self.indexPasado].dorsal}-{self.equipos[1].plantel[self.indexPasado].nombre}')
                 if self.equipos[0].plantel[self.index].tarjetasA == 1:
                     self.equipos[0].plantel[self.index].tarjetasA += 1
                     self.equipos[0].plantel[self.index].tarjetasR = 1
@@ -242,7 +226,8 @@ class partido:
                     self.indexA.pop(self.index)
                     self.expulsados[0].append(self.index)
                     self.equipos[0].expulsion(self.index)
-                    print(self.expulsados) 
+                    print(self.expulsados)
+                    print(self.indexA)
 
         else:
             return True
@@ -269,7 +254,8 @@ class partido:
 
 
     def equipo_ganadorDeSorteo(self):
-        print(f'''
-        Ganador del sorteo  =    {self.ganador_saque}
-        Ataca               =    {self.ganador_saque}
-        Defiende            =    {self.defiende}''')
+        centrar('-'*40)
+        centrar(f'| Ganador del sorteo  =    {self.ganador_saque}   |')
+        centrar(f'| Ataca               =    {self.ganador_saque}   |')
+        centrar(f' | Defiende            =    {self.defiende}   |')
+        centrar('-'*40)

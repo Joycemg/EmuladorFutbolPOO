@@ -36,6 +36,7 @@ class Club:
             |{self.plantel[indexPasado].dorsal}|{self.plantel[indexPasado].nombre}({self.nombreC}) se la paso a su compañero |{self.plantel[index].dorsal}|{self.plantel[index].nombre}({self.nombreC})
             ---
             ''', vd=0.006)
+        print('')
 
     def saca(self, indexPasado, index):
         show(f'''

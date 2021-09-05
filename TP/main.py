@@ -31,10 +31,10 @@ def generar_instanciaEquipo(nombre, colorA, colorB, pais, nombres, paises):
  
 
 #Creacion de equipos y partido
-equipoA = generar_instanciaEquipo('Tigres', 'Rojo', 'Blanco', 'Italia', listaNombres, listaPaises)
-equipoB = generar_instanciaEquipo('Leones', 'Amarillo', 'Azul', 'Italia', listaNombres, listaPaises)
+equipoA = generar_instanciaEquipo('Argentina', 'Rojo', 'Blanco', 'irlandia', listaNombres, listaPaises)
+equipoB = generar_instanciaEquipo('Venezuela', 'Amarillo', 'Azul', 'Alemania', listaNombres, listaPaises)
 
-primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 45)
+primerPartido = partido('Estado del sur', 'tiago perder', equipoA, equipoB, 70)
 
 primerPartido.mostrar_inicio()
 primerPartido.sorteo_saque()

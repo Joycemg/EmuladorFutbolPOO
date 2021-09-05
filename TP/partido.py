@@ -35,9 +35,9 @@ class partido:
 
 
     def mostrar_ganador(self):
-        print(f'''            
+        show(f'''            
         {self.equipos[0].nombreC}   [{self.goles[0]}]''')
-        print(f'''            
+        show(f'''            
         {self.equipos[1].nombreC}   [{self.goles[1]}]''')
         if self.goles[0] == self.goles[1]:
             print(f''' Los equipos empataron     ''')

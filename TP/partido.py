@@ -117,7 +117,7 @@ Pais    :   {self.equipos[0].pais}                          {self.equipos[1].pai
     def hacer_pases(self, probabilidadPases):
         Pases = random.randint(0, 100) * probabilidadPases
 
-        if Pases >= 60:
+        if Pases >= 70:
             if self.equipos[0].modo == True:
                 self.indexPasado  = self.index
                 self.index        = random.choice(self.indexA)

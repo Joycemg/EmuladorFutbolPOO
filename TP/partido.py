@@ -94,7 +94,7 @@ class partido:
         for x in range(0,2):
             if self.goles[x] == 0:
                 continue
-            print(f'    ---Goles del equipo {self.equipos[i].nombreC}')
+            print(f'    ---Sanciones {self.equipos[i].nombreC}')
             for i in range(0,11):
                 if self.equipos[x].plantel[i].tarjetasA == 1:
                     print(f'{self.equipos[x].plantel[i].dorsal}-{self.equipos[x].plantel[i].nombre} recibio {self.equipos[x].plantel[i].tarjetasA} una amarilla')

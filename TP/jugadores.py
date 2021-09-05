@@ -9,7 +9,6 @@ class Jugador:
         self.tarjetasR = 0
         self.goles = 0
         self.golesFallidos = 0
-        self.pelota = False
 
     def mostrar_jugador(self):
                 print(f'''
@@ -22,26 +21,4 @@ class Jugador:
             Tarjeta Amarilla {self.tarjetasA}
             Tarjeta ROja {self.tarjetasR}        
                       ''')
-
-
-    def dar_pelota(self):
-        self.pelota = True
-        
-    def quitar_pelota(self):
-        self.pelota = False
-
-    def saca_pelota(self):
-        print(f'         {self.nombre} Saca pelota')
-
-    def actualizar_tarjetas(self):
-        pass
-
-
-    def mostrar_golesFallidos(self):
-        pass
-
-    def actualizar_goles(self):
-        pass
-    def actualizar_golesFallidos(self):
-        pass
     

@@ -30,6 +30,8 @@ class Jugador:
     def quitar_pelota(self):
         self.pelota = False
 
+    def saca_pelota(self):
+        print(f'         {self.nombre} Saca pelota')
 
     def actualizar_tarjetas(self):
         pass

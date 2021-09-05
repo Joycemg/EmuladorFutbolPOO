@@ -30,18 +30,22 @@ class Club:
     def modo_defensa(self):
         self.modo = False
 
+    def saca_pelota(self):
+        print(f'         {self.plantel.nombre} Saca pelota')
+
     def da_pase(self, indexPasado, index):
         show(f'''
-            {self.nombreC} tiene la pelota
-            {self.plantel[indexPasado].dorsal}-{self.plantel[indexPasado].nombre} se la paso a {self.plantel[index].dorsal}-{self.plantel[index].nombre}
-            
+            ---
+            |{self.plantel[indexPasado].dorsal}|{self.plantel[indexPasado].nombre}({self.nombreC}) se la paso a su compañero|{self.plantel[index].dorsal}|{self.plantel[index].nombre}
+            ---
             ''', vd=0.015)
 
     def pierde_pase(self, index, indexPasado, equipo):
+
         show(f'''
             {self.nombreC} pierde la pelota
 
-            {self.plantel[index].dorsal}-{self.plantel[index].nombre} se la quito a {equipo.plantel[indexPasado].dorsal}-{equipo.plantel[indexPasado].nombre}
+            {self.plantel[index].dorsal}-{self.plantel[index].nombre}[{self.plantel[index].dorsal}] se la quito a {equipo.plantel[indexPasado].dorsal}-{equipo.plantel[indexPasado].nombre}
             
             ''', vd=0.015)
 

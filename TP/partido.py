@@ -1,3 +1,4 @@
+
 import random
 import time
 from funciones import show
@@ -88,8 +89,8 @@ class partido:
 
         
         #Probabilidades
-        self.probabilidadPases  = 0.80 #5
-        self.probabilidadGol    = 10.80
+        self.probabilidadPases  = 5.80 #5
+        self.probabilidadGol    = 1.80
 
         while time.time() < self.inicio_partido + self.tiempo_partido:
             time.sleep(0.1)
@@ -132,7 +133,6 @@ class partido:
                 self.index       = random.randint(0,10)
                 self.pases[1]   += 1
                 self.cont_pasesE = 0
-                self.sanciones()
                 self.equipos[0].modo_defensa()
                 self.equipos[1].modo_ofensivo()
                 self.equipos[1].pierde_pase(self.index, self.indexPasado, self.equipos[0])
@@ -228,14 +228,14 @@ class partido:
             self.cont_pasesE += 1
             self.equipos[0].modo_ofensivo()
             self.equipos[0].plantel[self.index].dar_pelota()
-            print(f'    {self.equipos[0].plantel[self.index].nombre} Saca pelota')
+            self.equipos[1].plantel[self.index].saca_pelota()
 
         else:
             self.defiende     = self.equipos[0].nombreC
             self.cont_pasesE += 1
             self.equipos[1].modo_ofensivo()
             self.equipos[1].plantel[self.index].dar_pelota()
-            print(f'    {self.equipos[1].plantel[self.index].nombre} Saca pelota')
+            self.equipos[1].plantel[self.index].saca_pelota()
 
     
 
@@ -246,6 +246,3 @@ class partido:
         Ganador del sorteo  =    {self.ganador_saque}
         Ataca               =    {self.ganador_saque}
         Defiende            =    {self.defiende}''')
-
-
-    
